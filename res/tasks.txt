@@ -2,3 +2,5 @@ study HTML
 study CSS
 study JS
 study Node FS
+study Java
+study Python

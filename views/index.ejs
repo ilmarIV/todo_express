@@ -7,32 +7,32 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
-<body>
+<body class="grey darken-4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
             <div class="card black">
                 <div class="card-content white-text">
-                <span class="card-title">TODO</span>
+                <span class="card-title">Todo List</span>
                 <div class="row">
-                    <form class="col s12">
+                    <form class="col s12" method="post" action="/">
                       <div class="row">
                         <div class="input-field col s6">
-                          <input placeholder="task" id="task" type="text" class="validate">
+                          <input placeholder="task" id="task" type="text" class="validate" name="task">
                           <label for="task">task</label>
                         </div>
                         </div>
-                        </form>
+                    </form>
                     </div>
                 </div>
-                          <div class="card-action">
-                            <ul class="collection">
-                                <% console.log(tasks) %>
-                                <% tasks.forEach(task => { %>
-                                <li class="collection-item"><%= task %></li>
-                                <% }) %>
-                            </ul>
+                    <div class="card-action">
+                    <ul class="collection">
+                        <% console.log(tasks) %>
+                        <% tasks.forEach(task => { %>
+                        <li class="collection-item"><%= task %></li>
+                        <% }) %>
+                    </ul>
                 </div>
             </div>
             </div>
