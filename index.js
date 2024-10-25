@@ -1,7 +1,13 @@
 const express = require('express')
-const app = express()
-const path=require("path")
+const path = require("path")
 const fs = require('node:fs')
+
+const app = express()
+
+app.use(express.urlencoded({extended: true}))
+
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'))
 
 
 const readFiles = (filePath) => {
@@ -11,38 +17,61 @@ const readFiles = (filePath) => {
                 console.error(err);
                 return;
             }
-            const tasks = data.split('\n')
+            const tasks = json.parse(data)
             resolve(tasks)
         });
     })
 }
 
 
-app.set("view engine","ejs")
-app.set("views",path.join(__dirname, "views"))
-app.use(express.urlencoded({ extended: true }));
+const writeFiles = (filePath, data) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(filePath, data, 'utf8', err => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            resolve(true)
+        })
+    })
+}
 
 
 app.get('/', (req, res) => {
-    readFiles('./res/tasks.txt').then((tasks) => {
-    res.render('index', {tasks:tasks})
+    readFiles('./tasks.json').then((tasks) => {
+        res.render('index', {tasks:tasks, error:null})
     })
 })
 
 
 app.post('/', (req, res) => {
     let task = req.body.task
-    readFiles('./res/tasks.txt').then((tasks) => {
-        tasks.push(task)
-        const data = tasks.join('\n')
-        fs.writeFile('./res/tasks.txt', data, err => {
-            if (err) {
-                console.error(err);
-                return;
+    let error = null
+    if (task.trim().length === 0) {
+        error = 'Please insert correct data'
+        readFiles('./tasks.json').then((tasks) => {
+            res.render('index', {tasks:tasks, error:error})
+        })
+    } else {
+        readFiles('./tasks.json').then((tasks) => {
+            let index
+            if (tasks.length === 0){
+                index = 0
+            } else {
+                index = tasks[task.length - 1].id + 1
             }
+            
+            const newTask = {id:index, task:task}
+            tasks.push(newTask)
+            console.log(tasks)
+
+            const data = JSON.stringify(tasks, null, 2)
+            
+            writeFiles('./tasks.json', data)
+
             res.redirect('/')
         })
-    })
+    }
 })
 
 

@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>Todo List</title>
 </head>
 <body class="grey darken-4">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-            <div class="card black">
-                <div class="card-content white-text">
-                <span class="card-title">Todo List</span>
-                <div class="row">
-                    <form class="col s12" method="post" action="/">
-                      <div class="row">
-                        <div class="input-field col s6">
-                          <input placeholder="task" id="task" type="text" class="validate" name="task">
-                          <label for="task">task</label>
+                <div class="card black">
+                    <div class="card-content white-text">
+                        
+                        <span class="card-title">Todo List</span>
+                        <div class="row">
+                            <form class="col s12" method="post" action="/">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input placeholder="task" id="task" type="text" class="validate" name="task">
+                                        <label for="task">Insert task</label>
+                                    </div>
+                                </div>
+                                <input type="submit" value="Add Task" class="btn"/>
+                            </form>
                         </div>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="card-action">
+                        <ul class="collection">
+                            <% tasks.forEach(task => { %>
+                                <li class="collection-item">
+                                    <%= task.task %>
+                                    <a href="delete-tasks/<%= task.id %>" class="secodary-content">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                        <a href="delete-tasks" class="btn">Clear All</a>
                     </div>
                 </div>
-                    <div class="card-action">
-                    <ul class="collection">
-                        <% console.log(tasks) %>
-                        <% tasks.forEach(task => { %>
-                        <li class="collection-item"><%= task %></li>
-                        <% }) %>
-                    </ul>
-                </div>
-            </div>
             </div>
         </div>
     </div>
