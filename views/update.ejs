@@ -31,26 +31,15 @@
                             <form class="col s12" method="post" action="/">
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input placeholder="task" id="task" type="text" class="validate white-text" name="task">
-                                        <label for="task">Insert task</label>
+                                        <input value="<%= updateTask %>" id="task" type="text" class="validate" name="task">
+                                        <label for="task">Update task</label>
+                                        <input value="<%= updateTaskId %>" id="taskId" type="hidden" name="taskId">
                                     </div>
                                 </div>
-                                <input type="submit" value="Add Task" class="btn"/>
+                                <input type="submit" value="Update Task" class="btn"/>
+                                <a href="/" class="btn">Cancel</a>
                             </form>
                         </div>
-                    </div>
-                    <div class="card-action">
-                        <ul class="collection">
-                            <% tasks.forEach(task => { %>
-                                <li class="collection-item">
-                                    <%= task.task %>
-                                    <a href="delete-tasks/<%= task.id %>" class="secodary-content">
-                                        <i class="material-icons">delete</i>
-                                    </a>
-                                </li>
-                            <% }) %>
-                        </ul>
-                        <a href="delete-tasks" class="btn">Clear All</a>
                     </div>
                 </div>
             </div>
@@ -58,6 +47,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    
 </body>
 </html>
