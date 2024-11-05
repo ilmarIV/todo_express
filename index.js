@@ -79,7 +79,7 @@ app.get('/delete-task/:taskId', (req, res) => {
     let deletedTaskId = parseInt(req.params.taskId)
     readFiles('./tasks.json').then(tasks => {
         tasks.forEach((task, index) => {
-            if(task.id === deletedTaskId){
+            if(task.id == deletedTaskId){
                 tasks.splice(index, 1)
             } 
         });

@@ -26,13 +26,14 @@
                             </div>
                         </div>
                         <% } %>
+                        <%# console.log(error) %>
                         <span class="card-title">Todo List</span>
                         <div class="row">
                             <form class="col s12" method="post" action="/">
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input placeholder="task" id="task" type="text" class="validate white-text" name="task">
                                         <label for="task">Insert task</label>
+                                        <input placeholder="task" id="task" type="text" class="validate white-text" name="task">
                                     </div>
                                 </div>
                                 <input type="submit" value="Add Task" class="btn"/>
@@ -44,13 +45,16 @@
                             <% tasks.forEach(task => { %>
                                 <li class="collection-item">
                                     <%= task.task %>
-                                    <a href="delete-tasks/<%= task.id %>" class="secodary-content">
+                                    <a href="delete-task/<%= task.id %>" class="secodary-content">
                                         <i class="material-icons">delete</i>
+                                    </a>
+                                    <a href="update-task/<%= task.id %>" class="secodary-content">
+                                        <i class="material-icons"> edit</i>
                                     </a>
                                 </li>
                             <% }) %>
                         </ul>
-                        <a href="delete-tasks" class="btn">Clear All</a>
+                        <a href="delete-tasks/" class="btn">Clear All</a>
                     </div>
                 </div>
             </div>
